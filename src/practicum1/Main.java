@@ -6,9 +6,10 @@ import java.util.*;
 public class Main{
 	public static void main(String[] arg) {
 		ReizigerOracleDaolmpl ro1 = new ReizigerOracleDaolmpl();
+
 		
 		Reiziger r1 = new Reiziger();
-		String geborteString1 = "19950522";
+		String geborteString1 = "801093600000"; //05/22/1995
 		long geborteDate1 = Long.valueOf(geborteString1);
 		java.sql.Date date1 = new java.sql.Date(geborteDate1);
 		r1.setNaam("Steven David");
@@ -16,8 +17,9 @@ public class Main{
 		ro1.save(r1);
 		
 		Reiziger r2 = new Reiziger();
-		String geborteString2 = "19950522";
+		String geborteString2 = "703202400000"; //04/14/1992
 		long geborteDate2 = Long.valueOf(geborteString2);
+		System.out.println(geborteDate2);
 		java.sql.Date date2 = new java.sql.Date(geborteDate2);
 		r2.setNaam("Russ Stan");
 		r2.setGbdatum(date2);
