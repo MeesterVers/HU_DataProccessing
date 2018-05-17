@@ -1,0 +1,51 @@
+Opdracht 1.1------------------------------------------------------------------------------------------------------------------------------------------------
+Stap 1:------
+declare
+  l_sql varchar2(32767);
+  c_tab_comment varchar2(32767);
+  procedure run(p_sql varchar2) as
+  begin 
+     execute immediate p_sql;
+     
+  end; 
+begin
+run('create table "TESTADMIN".MEDEWEKERS_V2 as select * from "TESTADMIN"."MEDEWERKERS" where '||11||' = 1');
+  begin
+  select comments into c_tab_comment from sys.all_TAB_comments where owner = 'TESTADMIN' and table_name = 'MEDEWERKERS' and comments is not null;
+  run('comment on table TESTADMIN.MEDEWEKERS_V3 is '||''''||REPLACE(c_tab_comment, q'[']', q'['']')||'''');
+
+  for tc in (select column_name from sys.all_tab_cols where owner = 'TESTADMIN' and table_name = 'MEDEWERKERS')
+      loop
+     for c in (select comments from sys.all_col_comments where owner = 'TESTADMIN' and table_name = 'MEDEWERKERS' and column_name=tc.column_name) 
+     loop 
+     run ('comment on column TESTADMIN.MEDEWEKERS_V3.'||tc.column_name||' is '||''''||REPLACE(c.comments, q'[']', q'['']')||'''');
+   end loop;
+  end loop;
+  EXCEPTION
+    WHEN OTHERS THEN NULL; 
+  end;
+end;
+
+Stap 2:----------
+"GESLACHT" VARCHAR2(1 BYTE), 
+
+ 
+Opdracht 1.2------------------------------------------------------------------------------------------------------------------------------------------------
+CREATE SEQUENCE "TEST"."NUMMERS" MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 10 START WITH 50 CACHE 20 NOORDER NOCYCLE ;
+
+
+Opdracht 1.3 -----------------------------------------------------------------------------------------------------------------------------------------------
+CREATE TABLE ADRESSEN (
+POSTCODE VARCHAR(6),
+HUISNUMMER INT,
+INGANGSDATUM DATE NOT NULL,
+EINDDATUM DATE CHECK (EINDDATUM > INGANGSDATUM),
+TELEFOON INT UNIQUE,
+MED_MNR INT NOT NULL,
+PRIMARY KEY (POSTCODE, HUISNUMMER, INGANGSDATUM),
+CONSTRAINT FK_MEDNR FOREIGN KEY (MED_MNR)
+REFERENCES MEDEWERKERS (MED_MNR)
+);
+
+4. CONSTRAINT "M_VERK_CHK" CHECK (VERKOPER > null)
++ check(comm > null) ENABLE,
