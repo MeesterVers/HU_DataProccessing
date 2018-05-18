@@ -15,15 +15,21 @@ public class ReizigerOracleDaolmpl extends OracleBaseDao implements ReizigerDao{
 		ResultSet result = statement.executeQuery(query);
 
 		// Iets doen met de resultaten
+		int reizigerID;
+		String voorletters;
+		String tussenvoegsel;
 		String achternaam;
 		Date gebortedatum;
 		Reiziger obj;
 		
 		while (result.next()) {
+			reizigerID = result.getInt("reizigerID");
+			voorletters = result.getString("voorletters");
+			tussenvoegsel = result.getString("tussenvoegsel");
 			achternaam = result.getString("achternaam");
 			gebortedatum = result.getDate("gebortedatum");
-			
-			obj = new Reiziger(achternaam, gebortedatum);
+
+			obj = new Reiziger(reizigerID, voorletters, tussenvoegsel, achternaam, gebortedatum);
 			reizigers.add(obj);
 		}
 		conn.close();

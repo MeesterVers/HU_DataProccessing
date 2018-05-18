@@ -12,7 +12,7 @@ public class Main{
 		System.out.println("Alle reizigers: ");
 		List<Reiziger> reizigers = ro1.findAll();
 		for (Reiziger reiziger : reizigers) {
-			System.out.println("achternaam: " +reiziger.getAchternaam()+ " geboortedatum: " +reiziger.getGbdatum());
+			System.out.println("Reiziger: #" +reiziger.getReizigerID() + " "+reiziger.getVoorletters()+ ". "+ reiziger.getTussenvoegsel()+" "+reiziger.getAchternaam()+ " geboortedatum: " +reiziger.getGbdatum());
 		}
 	  }
 	  
