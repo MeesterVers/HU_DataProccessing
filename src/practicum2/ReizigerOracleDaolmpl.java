@@ -47,8 +47,21 @@ public class ReizigerOracleDaolmpl extends OracleBaseDao implements ReizigerDao{
 		return (List<Reiziger>) reizigers;
 	}
 	
-	public Reiziger save(Reiziger reiziger){
-		reizigers.add(reiziger);
+	public Reiziger save(Reiziger reiziger) throws SQLException{
+		conn = OracleBaseDao.getConnection();
+		String query = "INSERT INTO reiziger (reizigerID, voorletters, tussenvoegsel, achternaam, gebortedatum) VALUES (?, ?, ?, ?, ?)";
+		 
+		PreparedStatement statement = conn.prepareStatement(query);
+		statement.setInt(1, reiziger.getReizigerID());
+		statement.setString(2, reiziger.getVoorletters());
+		statement.setString(3, reiziger.getTussenvoegsel());
+		statement.setString(4, reiziger.getAchternaam());
+		statement.setDate(5, reiziger.getGbdatum());
+		 
+		int rowsInserted = statement.executeUpdate();
+		if (rowsInserted > 0) {
+		    System.out.println("Reiziger toegevoegd");
+		}
 		return reiziger;
 	}
 	
